@@ -9,162 +9,204 @@ import re
 # ^(\S+):(\d+) (\S+) (\S+) (\S+) (\[.+\]) \"(.*)\" (\d+) (\d+) \"(.*)\" \"(.*)\" (\S+) (\S+) (-|\d+) (\d+) (\d+) (\S+) (\S+) (\d+) (-|\d+) (\S+) (\d+) \"(\S*)\" \"(\S*)\" (\S+) (\d+) (\S+) (X|\+|-) (\d+) (\d+)$
 
 tokens = {
-    r"%a": {
+    "%a": {
         "name": "client_ip",
         "regex": r"\S+"
     },
-    r"%{c}a": {
+    "%{c}a": {
         "name": "underlying_peer_ip",
         "regex": r"\S+"
     },
-    r"%A": {
+    "%A": {
         "name": "local_ip",
         "regex": r"\S+"
     },
-    r"%B": {
+    "%B": {
         "name": "response_size",
         "regex": r"\d+"
     },
-    r"%b": {
+    "%b": {
         "name": "response_size_clf",
         "regex": r"-|\d+"
     },
-    r"%D": {
+    "%D": {
         "name": "time_to_serve_us",
         "regex": r"\d+"
     },
-    r"%f": {
+    "%f": {
         "name": "filename",
         "regex": r"\S+"
     },
-    r"%h": {
+    "%h": {
         "name": "remote_hostname",
         "regex": r"\S+"
     },
-    r"%{c}h": {
+    "%{c}h": {
         "name": "underlying_remote_hostname",
         "regex": r"\S+"
     },
-    r"%H": {
+    "%H": {
         "name": "request_protocol",
         "regex": r"\S+"
     },
-    r"%k": {
+    "%k": {
         "name": "keepalive_count",
         "regex": r"\d+"
     },
-    r"%l": {
+    "%l": {
         "name": "remote_logname",
         "regex": r"\S+"
     },
-    r"%L": {
+    "%L": {
         "name": "error_log_id",
         "regex": r"-|\d+"
     },
-    r"%m": {
+    "%m": {
         "name": "request_method",
         "regex": r"\S+"
     },
-    r"%p": {
+    "%p": {
         "name": "port",
         "regex": r"\d+"
     },
-    r"%{canonical}p": {
+    "%{canonical}p": {
         "name": "canonical_port",
         "regex": r"\d+"
     },
-    r"%{local}p": {
+    "%{local}p": {
         "name": "local_port",
         "regex": r"\d+"
     },
-    r"%{remote}p": {
+    "%{remote}p": {
         "name": "remote_port",
         "regex": r"\d+"
     },
-    r"%P": {
+    "%P": {
         "name": "pid",
         "regex": r"\d+"
     },
-    r"%{pid}P": {
+    "%{pid}P": {
         "name": "pid_alt",
         "regex": r"\d+"
     },
-    r"%{tid}P": {
+    "%{tid}P": {
         "name": "tid",
         "regex": r"\d+"
     },
-    r"%{hextid}P": {
+    "%{hextid}P": {
         "name": "hextid",
         "regex": r"(?:0[xX])?[0-9a-fA-F]+"
     },
-    r"%q": {
+    "%q": {
         "name": "query",
         "regex": r"\S*"
     },
-    r"%r": {
+    "%r": {
         "name": "first_line",
         "regex": r".*"
     },
-    r"%R": {
+    "%R": {
         "name": "handler",
         "regex": r"\S+"
     },
-    r"%s": {
+    "%s": {
         "name": "status",
         "regex": r"\d+"
     },
-    r"%>s": {
+    "%>s": {
         "name": "final_status",
         "regex": r"\d+"
     },
-    r"%t": {
+    "%t": {
         "name": "time",
         "regex": r"\[.+\]"
     },
-    r"%T": {
+    "%T": {
         "name": "time_to_serve_s",
         "regex": r"\d+"
     },
-    r"%u": {
+    "%u": {
         "name": "remote_user",
         "regex": r"\S+"
     },
-    r"%U": {
+    "%U": {
         "name": "url",
         "regex": r"\S*"
     },
-    r"%v": {
+    "%v": {
         "name": "server_name",
         "regex": r"\S+"
     },
-    r"%V": {
+    "%V": {
         "name": "server_name_ucn",
         "regex": r"\S+"
     },
-    r"%X": {
+    "%X": {
         "name": "connection_status",
         "regex": r"X|\+|-"
     },
-    r"%I": {
+    "%I": {
         "name": "bytes_received",
         "regex": r"\d+"
     },
-    r"%O": {
+    "%O": {
         "name": "bytes_sent",
         "regex": r"\d+"
     },
-    r"%S": {
+    "%S": {
         "name": "bytes_transferred",
         "regex": r"\d+"
     },
-    r"%{Referer}i": {
+    "%{Referer}i": {
         "name": "referer",
         "regex": r".*"
     },
-    r"%{User-Agent}i": {
+    "%{User-Agent}i": {
         "name": "user_agent",
         "regex": r".*"
-    },
+    }
+}
+
+token_types = {
+    "client_ip": str,
+    "underlying_peer_ip": str,
+    "local_ip": str,
+    "response_size": int,
+    "response_size_clf": None,
+    "time_to_serve_us": int,
+    "filename": str,
+    "remote_hostname": str,
+    "underlying_remote_hostname": str,
+    "request_protocol": str,
+    "keepalive_count": int,
+    "remote_logname": str,
+    "error_log_id": None,
+    "request_method": str,
+    "port": int,
+    "canonical_port": int,
+    "local_port": int,
+    "remote_port": int,
+    "pid": int,
+    "pid_alt": int,
+    "tid": int,
+    "hextid": None,
+    "query": str,
+    "first_line": str,
+    "handler": str,
+    "status": int,
+    "final_status": int,
+    "time": None,
+    "time_to_serve_s": int,
+    "remote_user": str,
+    "url": str,
+    "server_name": str,
+    "server_name_ucn": str,
+    "connection_status": None,
+    "bytes_received": int,
+    "bytes_sent": int,
+    "bytes_transferred": int,
+    "referer": str,
+    "user_agent": str
 }
 
 def build_matcher(log_format):
