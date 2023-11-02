@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex" />
+    <title>{{page_title}} ({{generated_date}})</title>
+    <style>
+{{styles}}
+    </style>
+  </head>
+  <body>
+<h1>{{page_title}}</h1>
+<h4>Generated at {{generated_date}}</h4>
+<h2>Summary</h2>
+{{overall}}
+<br>
+{{dates}}
+<br>
+{{bytes_transferred}}
+<br>
+<h2>Servers</h2>
+{{servers_table}}
+{{ports_table}}
+<br>
+<h2>Times</h2>
+{{yearly_table}}
+{{monthly_table}}
+{{day_of_week_table}}
+{{hourly_table}}
+<br>
+<h2>Visitors</h2>
+{{ip_table}}
+{{users_table}}
+{{user_agent_table}}
+<br>
+<h2>Requests</h2>
+{{files_table}}
+{{queries_table}}
+{{referers_table}}
+{{responses_table}}
+{{time_taken_table}}
+<br>
+<p>{{footer}}</p>
+  </body>
+</html>

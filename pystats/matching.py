@@ -2,11 +2,11 @@ import re
 
 # "%v:%p %h %l %u %t \"%r\" %s:%>s %I %O \"%{Referer}i\" \"%{User-Agent}i\" %D %k %f \"%U\" \"%q\""
 # %v:%p %h %l %u %t "%r" %s:%>s %I %O "%{Referer}i" "%{User-Agent}i" %D %k %f "%U" "%q"
-# ^(\S+):(\d+) (\S+) (\S+) (\S+) (\[.+\]) "(.*)" (\d+):(\d+) (\d+) (\d+) "(.*)" "(.*)" (\d+) (\d+) (\S+) "(\S*)" "(\S*)"$
+# ^(\S+):(\d+) (\S+) (\S+) (\S+) (\[.+\]) "(.*)" (\d+):(\d+) (\d+) (\d+) "(.*)" "(.*)" (\d+) (\d+) (\S+) "(.*)" "(.*)"$
 
 # "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\" %a %A %b %B %D %f %H %k %L %m %P \"%U\" \"%q\" %R %T %V %X %I %S"
 # %v:%p %h %l %u %t "%r" %>s %O "%{Referer}i" "%{User-Agent}i" %a %A %b %B %D %f %H %k %L %m %P "%U" "%q" %R %T %V %X %I %S
-# ^(\S+):(\d+) (\S+) (\S+) (\S+) (\[.+\]) \"(.*)\" (\d+) (\d+) \"(.*)\" \"(.*)\" (\S+) (\S+) (-|\d+) (\d+) (\d+) (\S+) (\S+) (\d+) (-|\d+) (\S+) (\d+) \"(\S*)\" \"(\S*)\" (\S+) (\d+) (\S+) (X|\+|-) (\d+) (\d+)$
+# ^(\S+):(\d+) (\S+) (\S+) (\S+) (\[.+\]) \"(.*)\" (\d+) (\d+) \"(.*)\" \"(.*)\" (\S+) (\S+) (-|\d+) (\d+) (\d+) (\S+) (\S+) (\d+) (-|\d+) (\S+) (\d+) \"(.*)\" \"(.*)\" (\S+) (\d+) (\S+) (X|\+|-) (\d+) (\d+)$
 
 tokens = {
     "%a": {
@@ -99,7 +99,7 @@ tokens = {
     },
     "%q": {
         "name": "query",
-        "regex": r"\S*"
+        "regex": r".*"
     },
     "%r": {
         "name": "first_line",
@@ -131,7 +131,7 @@ tokens = {
     },
     "%U": {
         "name": "url",
-        "regex": r"\S*"
+        "regex": r".*"
     },
     "%v": {
         "name": "server_name",
@@ -168,44 +168,44 @@ tokens = {
 }
 
 token_types = {
-    "client_ip": str,
-    "underlying_peer_ip": str,
-    "local_ip": str,
-    "response_size": int,
-    "response_size_clf": None,
-    "time_to_serve_us": int,
-    "filename": str,
-    "remote_hostname": str,
-    "underlying_remote_hostname": str,
-    "request_protocol": str,
-    "keepalive_count": int,
-    "remote_logname": str,
-    "error_log_id": None,
-    "request_method": str,
-    "port": int,
-    "canonical_port": int,
-    "local_port": int,
-    "remote_port": int,
-    "pid": int,
-    "pid_alt": int,
-    "tid": int,
-    "hextid": None,
-    "query": str,
-    "first_line": str,
-    "handler": str,
-    "status": int,
-    "final_status": int,
-    "time": None,
-    "time_to_serve_s": int,
-    "remote_user": str,
-    "url": str,
-    "server_name": str,
-    "server_name_ucn": str,
-    "connection_status": None,
     "bytes_received": int,
     "bytes_sent": int,
     "bytes_transferred": int,
+    "canonical_port": int,
+    "client_ip": str,
+    "connection_status": None,
+    "error_log_id": "clf",
+    "filename": str,
+    "final_status": int,
+    "first_line": str,
+    "handler": str,
+    "hextid": None,
+    "keepalive_count": int,
+    "local_ip": str,
+    "local_port": int,
+    "pid": int,
+    "pid_alt": int,
+    "port": int,
+    "query": str,
     "referer": str,
+    "remote_hostname": str,
+    "remote_logname": "clf_str",
+    "remote_port": int,
+    "remote_user": "clf_str",
+    "request_method": str,
+    "request_protocol": str,
+    "response_size": int,
+    "response_size_clf": "clf",
+    "server_name": str,
+    "server_name_ucn": str,
+    "status": int,
+    "tid": int,
+    "time": None,
+    "time_to_serve_s": int,
+    "time_to_serve_us": int,
+    "underlying_peer_ip": str,
+    "underlying_remote_hostname": str,
+    "url": str,
     "user_agent": str
 }
 
